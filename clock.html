@@ -65,68 +65,67 @@
   </div>
 
   <script>
-    // Start date: Sept 13, 2021 15:45 (3:45pm)
-    const startDate = new Date(2021, 8, 13, 15, 45, 0); 
-    // Month is zero-based: 8 = September
+   const startDate = new Date(2021, 8, 13, 15, 45, 0); // Sept 13, 2021, 3:45 PM
 
-    function updateClock() {
-      const now = new Date();
+function updateClock() {
+  const now = new Date();
 
-      // Total difference in milliseconds
-      let diff = now - startDate;
+  // Calculate years and months
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
 
-      // Helper: milliseconds in time units
-      const msInSecond = 1000;
-      const msInMinute = msInSecond * 60;
-      const msInHour = msInMinute * 60;
-      const msInDay = msInHour * 24;
-      const msInWeek = msInDay * 7;
+  // Adjust if days < 0
+  if (days < 0) {
+    months--;
+    // Get days in previous month
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
 
-      // Calculate years and months approximately using date math
-      let years = now.getFullYear() - startDate.getFullYear();
-      let months = now.getMonth() - startDate.getMonth();
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
 
-      // Calculate the remaining time after removing full years and months
-      let tempStart = new Date(startDate);
-      tempStart.setFullYear(tempStart.getFullYear() + years);
-      tempStart.setMonth(tempStart.getMonth() + months);
+  // Calculate time left for weeks, days, hours, minutes, seconds
+  // Create an adjusted start date accounting for years and months passed
+  const adjustedStart = new Date(startDate);
+  adjustedStart.setFullYear(adjustedStart.getFullYear() + years);
+  adjustedStart.setMonth(adjustedStart.getMonth() + months);
+  adjustedStart.setDate(adjustedStart.getDate() + days);
 
-      let remainingMs = now - tempStart;
+  let diffMs = now - adjustedStart;
 
-      // Calculate weeks, days, hours, minutes, seconds from remainingMs
-      const weeks = Math.floor(remainingMs / msInWeek);
-      remainingMs -= weeks * msInWeek;
+  const msInSecond = 1000;
+  const msInMinute = msInSecond * 60;
+  const msInHour = msInMinute * 60;
+  const msInDay = msInHour * 24;
+  const msInWeek = msInDay * 7;
 
-      const days = Math.floor(remainingMs / msInDay);
-      remainingMs -= days * msInDay;
+  const weeks = Math.floor(diffMs / msInWeek);
+  diffMs -= weeks * msInWeek;
 
-      const hours = Math.floor(remainingMs / msInHour);
-      remainingMs -= hours * msInHour;
+  const remDays = Math.floor(diffMs / msInDay);
+  diffMs -= remDays * msInDay;
 
-      const minutes = Math.floor(remainingMs / msInMinute);
-      remainingMs -= minutes * msInMinute;
+  const hours = Math.floor(diffMs / msInHour);
+  diffMs -= hours * msInHour;
 
-      const seconds = Math.floor(remainingMs / msInSecond);
+  const minutes = Math.floor(diffMs / msInMinute);
+  diffMs -= minutes * msInMinute;
 
-      // Update DOM
-      document.getElementById('years').textContent = years;
-      document.getElementById('months').textContent = months;
-      document.getElementById('weeks').textContent = weeks;
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
-    }
+  const seconds = Math.floor(diffMs / msInSecond);
 
-    // Initial call
-    updateClock();
-
-    // Update every second
-    setInterval(updateClock, 1000);
+  // Update DOM elements
+  document.getElementById('years').textContent = years;
+  document.getElementById('months').textContent = months;
+  document.getElementById('weeks').textContent = weeks;
+  document.getElementById('days').textContent = remDays;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+}
   </script>
 </body>
 </html>
