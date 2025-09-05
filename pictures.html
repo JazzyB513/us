@@ -26,20 +26,30 @@
 
     #carousel-container {
       width: 100%;
-      max-width: 600px;
-      aspect-ratio: 16 / 9; /* Maintains widescreen aspect ratio */
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
       overflow: hidden;
       border-radius: 12px;
-      box-shadow: #4d179a;
-      background-color: #201b41;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       position: relative;
+      margin: 20px auto;
     }
-    
+
+    /* Ensures the image fits entirely inside */
     #carousel-image {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* 👈 This makes the whole image fit without cropping */
+      object-fit: contain;
       transition: opacity 0.4s ease-in-out;
+    }
+    
+    /* 📱 Mobile Fix: Override aspect-ratio and use vh-based height */
+    @media (max-width: 600px) {
+      #carousel-container {
+        aspect-ratio: auto;
+        height: 50vh;
+      }
     }
 
     .carousel-button {
