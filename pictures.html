@@ -30,8 +30,8 @@
       aspect-ratio: 16 / 9;
       overflow: hidden;
       border-radius: 12px;
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background-color: #1f2036;
+      box-shadow: #0e0e19;
       position: relative;
       margin: 20px auto;
     }
@@ -43,14 +43,14 @@
       object-fit: contain;
       transition: opacity 0.4s ease-in-out;
     }
-    
-    /* 📱 Mobile Fix: Override aspect-ratio and use vh-based height */
+
     @media (max-width: 600px) {
       #carousel-container {
         aspect-ratio: auto;
-        height: 50vh;
+        height: 100vh;
+        border-radius: 0;
+        }
       }
-    }
 
     .carousel-button {
       position: absolute;
