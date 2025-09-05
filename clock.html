@@ -64,7 +64,7 @@
     <div class="time-segment"><span id="seconds"></span> <span class="label">Seconds</span></div>
   </div>
 
- <a href="index.html" class="back">← Back to Home</a>
+   <a href="index.html" class="back">← Back to Home</a>
   
   <script>
    const startDate = new Date(2021, 8, 13, 15, 45, 0); // Sept 13, 2021, 3:45 PM
@@ -93,11 +93,10 @@ function updateClock() {
   // Calculate time left for weeks, days, hours, minutes, seconds
   // Create an adjusted start date accounting for years and months passed
   const adjustedStart = new Date(startDate);
-  adjustedStart.setFullYear(adjustedStart.getFullYear() + years);
-  adjustedStart.setMonth(adjustedStart.getMonth() + months);
-  adjustedStart.setDate(adjustedStart.getDate() + days);
+ adjustedStart.setFullYear(adjustedStart.getFullYear() + years);
+adjustedStart.setMonth(adjustedStart.getMonth() + months);
 
-  let diffMs = now - adjustedStart;
+let diffMs = now - adjustedStart;
 
   const msInSecond = 1000;
   const msInMinute = msInSecond * 60;
