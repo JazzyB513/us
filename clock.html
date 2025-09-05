@@ -126,6 +126,10 @@ function updateClock() {
   document.getElementById('minutes').textContent = minutes;
   document.getElementById('seconds').textContent = seconds;
 }
+
+    updateClock();
+setInterval(updateClock, 1000);
+
   </script>
 </body>
 </html>
