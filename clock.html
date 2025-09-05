@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Time Together</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-family: 'Pacifico', cursive;
+      color: #d6336c;
+    }
+
+    #clock {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px 40px;
+      box-shadow: 0 6px 12px rgba(214, 51, 108, 0.3);
+      font-size: 1.5rem;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .time-segment {
+      margin: 12px 0;
+      font-weight: 600;
+    }
+
+    .label {
+      font-weight: 400;
+      color: #777;
+      margin-left: 6px;
+    }
+  </style>
+  <!-- Import Pacifico font -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <h1>Time We've Been Together!</h1>
+
+  <div id="clock">
+    <div class="time-segment"><span id="years"></span> <span class="label">Years</span></div>
+    <div class="time-segment"><span id="months"></span> <span class="label">Months</span></div>
+    <div class="time-segment"><span id="weeks"></span> <span class="label">Weeks</span></div>
+    <div class="time-segment"><span id="days"></span> <span class="label">Days</span></div>
+    <div class="time-segment"><span id="hours"></span> <span class="label">Hours</span></div>
+    <div class="time-segment"><span id="minutes"></span> <span class="label">Minutes</span></div>
+    <div class="time-segment"><span id="seconds"></span> <span class="label">Seconds</span></div>
+  </div>
+
+  <script>
+    // Start date: Sept 13, 2021 15:45 (3:45pm)
+    const startDate = new Date(2021, 8, 13, 15, 45, 0); 
+    // Month is zero-based: 8 = September
+
+    function updateClock() {
+      const now = new Date();
+
+      // Total difference in milliseconds
+      let diff = now - startDate;
+
+      // Helper: milliseconds in time units
+      const msInSecond = 1000;
+      const msInMinute = msInSecond * 60;
+      const msInHour = msInMinute * 60;
+      const msInDay = msInHour * 24;
+      const msInWeek = msInDay * 7;
+
+      // Calculate years and months approximately using date math
+      let years = now.getFullYear() - startDate.getFullYear();
+      let months = now.getMonth() - startDate.getMonth();
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // Calculate the remaining time after removing full years and months
+      let tempStart = new Date(startDate);
+      tempStart.setFullYear(tempStart.getFullYear() + years);
+      tempStart.setMonth(tempStart.getMonth() + months);
+
+      let remainingMs = now - tempStart;
+
+      // Calculate weeks, days, hours, minutes, seconds from remainingMs
+      const weeks = Math.floor(remainingMs / msInWeek);
+      remainingMs -= weeks * msInWeek;
+
+      const days = Math.floor(remainingMs / msInDay);
+      remainingMs -= days * msInDay;
+
+      const hours = Math.floor(remainingMs / msInHour);
+      remainingMs -= hours * msInHour;
+
+      const minutes = Math.floor(remainingMs / msInMinute);
+      remainingMs -= minutes * msInMinute;
+
+      const seconds = Math.floor(remainingMs / msInSecond);
+
+      // Update DOM
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('weeks').textContent = weeks;
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    // Initial call
+    updateClock();
+
+    // Update every second
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
 
