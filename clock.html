@@ -26,7 +26,7 @@
       color: #d6336c;
     }
 
-    #clock {
+    #clock, #totals {
       background: #fff;
       border-radius: 12px;
       padding: 25px 40px;
@@ -34,6 +34,7 @@
       font-size: 1.5rem;
       max-width: 450px;
       width: 100%;
+      margin-bottom: 30px;
     }
 
     .time-segment {
@@ -63,75 +64,100 @@
     <div class="time-segment"><span id="minutes"></span> <span class="label">Minutes</span></div>
     <div class="time-segment"><span id="seconds"></span> <span class="label">Seconds</span></div>
   </div>
-
-   <a href="index.html" class="back">← Back to Home!</a>
   
+  <h1>That Means...</h1>
+
+  <div id="totals">
+    <div class="time-segment"><span id="totalYears"></span> <span class="label">Total Years</span></div>
+    <div class="time-segment"><span id="totalMonths"></span> <span class="label">Total Months</span></div>
+    <div class="time-segment"><span id="totalWeeks"></span> <span class="label">Total Weeks</span></div>
+    <div class="time-segment"><span id="totalDays"></span> <span class="label">Total Days</span></div>
+    <div class="time-segment"><span id="totalHours"></span> <span class="label">Total Hours</span></div>
+    <div class="time-segment"><span id="totalMinutes"></span> <span class="label">Total Minutes</span></div>
+    <div class="time-segment"><span id="totalSeconds"></span> <span class="label">Total Seconds</span></div>
+  </div>
+
   <script>
-   const startDate = new Date(2021, 8, 13, 15, 45, 0); // Sept 13, 2021, 3:45 PM
+    const startDate = new Date(2021, 8, 13, 15, 45, 0); // Sept 13, 2021, 3:45 PM
 
-function updateClock() {
-  const now = new Date();
+    function updateClock() {
+      const now = new Date();
 
-  // Calculate years and months
-  let years = now.getFullYear() - startDate.getFullYear();
-  let months = now.getMonth() - startDate.getMonth();
-  let days = now.getDate() - startDate.getDate();
+      // Calculate years and months (like before)
+      let years = now.getFullYear() - startDate.getFullYear();
+      let months = now.getMonth() - startDate.getMonth();
+      let days = now.getDate() - startDate.getDate();
 
-  // Adjust if days < 0
-  if (days < 0) {
-    months--;
-    // Get days in previous month
-    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-    days += prevMonth.getDate();
-  }
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
 
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
 
-  // Calculate time left for weeks, days, hours, minutes, seconds
-  // Create an adjusted start date accounting for years and months passed
-  const adjustedStart = new Date(startDate);
- adjustedStart.setFullYear(adjustedStart.getFullYear() + years);
-adjustedStart.setMonth(adjustedStart.getMonth() + months);
+      const adjustedStart = new Date(startDate);
+      adjustedStart.setFullYear(adjustedStart.getFullYear() + years);
+      adjustedStart.setMonth(adjustedStart.getMonth() + months);
+      adjustedStart.setDate(adjustedStart.getDate() + days);
 
-let diffMs = now - adjustedStart;
+      let diffMs = now - adjustedStart;
 
-  const msInSecond = 1000;
-  const msInMinute = msInSecond * 60;
-  const msInHour = msInMinute * 60;
-  const msInDay = msInHour * 24;
-  const msInWeek = msInDay * 7;
+      const msInSecond = 1000;
+      const msInMinute = msInSecond * 60;
+      const msInHour = msInMinute * 60;
+      const msInDay = msInHour * 24;
+      const msInWeek = msInDay * 7;
 
-  const weeks = Math.floor(diffMs / msInWeek);
-  diffMs -= weeks * msInWeek;
+      const weeks = Math.floor(diffMs / msInWeek);
+      diffMs -= weeks * msInWeek;
 
-  const remDays = Math.floor(diffMs / msInDay);
-  diffMs -= remDays * msInDay;
+      const remDays = Math.floor(diffMs / msInDay);
+      diffMs -= remDays * msInDay;
 
-  const hours = Math.floor(diffMs / msInHour);
-  diffMs -= hours * msInHour;
+      const hours = Math.floor(diffMs / msInHour);
+      diffMs -= hours * msInHour;
 
-  const minutes = Math.floor(diffMs / msInMinute);
-  diffMs -= minutes * msInMinute;
+      const minutes = Math.floor(diffMs / msInMinute);
+      diffMs -= minutes * msInMinute;
 
-  const seconds = Math.floor(diffMs / msInSecond);
+      const seconds = Math.floor(diffMs / msInSecond);
 
-  // Update DOM elements
-  document.getElementById('years').textContent = years;
-  document.getElementById('months').textContent = months;
-  document.getElementById('weeks').textContent = weeks;
-  document.getElementById('days').textContent = remDays;
-  document.getElementById('hours').textContent = hours;
-  document.getElementById('minutes').textContent = minutes;
-  document.getElementById('seconds').textContent = seconds;
-}
+      // Update "clock" display (years, months, weeks, days...)
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('weeks').textContent = weeks;
+      document.getElementById('days').textContent = remDays;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
 
-    updateClock();
-setInterval(updateClock, 1000);
+      // Calculate total times
+      const totalMs = now - startDate;
+      const totalSeconds = Math.floor(totalMs / msInSecond);
+      const totalMinutes = Math.floor(totalMs / msInMinute);
+      const totalHours = Math.floor(totalMs / msInHour);
+      const totalDays = Math.floor(totalMs / msInDay);
+      const totalWeeks = Math.floor(totalDays / 7);
+      const totalMonths = (years * 12) + months + (days / 30); // Approximate months including days fraction
+      const totalYears = years + (months / 12) + (days / 365);
 
+      // Update "totals" display
+      document.getElementById('totalYears').textContent = totalYears.toFixed(2);
+      document.getElementById('totalMonths').textContent = totalMonths.toFixed(1);
+      document.getElementById('totalWeeks').textContent = totalWeeks;
+      document.getElementById('totalDays').textContent = totalDays;
+      document.getElementById('totalHours').textContent = totalHours;
+      document.getElementById('totalMinutes').textContent = totalMinutes;
+      document.getElementById('totalSeconds').textContent = totalSeconds;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call
   </script>
+
 </body>
 </html>
-
