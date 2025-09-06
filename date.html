@@ -52,6 +52,27 @@
   </details>
 
   <a href="index.html" class="back">← Back to Home</a>
-
+<scrpit> 
+    // Load the sidebar
+    fetch("sidebar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("sidebar-container").innerHTML = data;
+  
+        // Add toggle behavior after sidebar is loaded
+        window.toggleSidebar = function() {
+          document.getElementById("sidebar").classList.toggle("active");
+        };
+  
+        // Close sidebar on link click (mobile only)
+        document.querySelectorAll(".sidebar a").forEach(link => {
+          link.addEventListener("click", () => {
+            if (window.innerWidth <= 700) {
+              document.getElementById("sidebar").classList.remove("active");
+            }
+          });
+        });
+      });
+</scrpit>
 </body>
 </html>
