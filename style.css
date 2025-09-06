@@ -113,10 +113,9 @@ a.back:hover {
 }
 
 .hamburger {
-  display: block;
   position: fixed;
   top: 15px;
-  left: 15px;
+  right: 15px;   /* move to right side */
   font-size: 26px;
   color: #d6336c;
   background: none;
