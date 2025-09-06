@@ -9,6 +9,12 @@
 </head>
 <body>
 
+  <!-- 🍔 Hamburger Button -->
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+  <!-- Sidebar will be injected here -->
+  <div id="sidebar-container"></div>
+
   <h1>Time We've Been Together!</h1>
 
   <div id="clock">
@@ -35,13 +41,17 @@
 
   <a href="index.html" class="back">← Back to Home</a>
   
+  <!-- Shared sidebar script -->
+  <script src="script.js"></script>
+
+  <!-- Page-specific clock script -->
   <script>
     const startDate = new Date(2021, 8, 13, 15, 45, 0); // Sept 13, 2021, 3:45 PM
 
     function updateClock() {
       const now = new Date();
 
-      // Calculate years and months (like before)
+      // Years, months, days
       let years = now.getFullYear() - startDate.getFullYear();
       let months = now.getMonth() - startDate.getMonth();
       let days = now.getDate() - startDate.getDate();
@@ -83,7 +93,7 @@
 
       const seconds = Math.floor(diffMs / msInSecond);
 
-      // Update "clock" display (years, months, weeks, days...)
+      // Update clock
       document.getElementById('years').textContent = years;
       document.getElementById('months').textContent = months;
       document.getElementById('weeks').textContent = weeks;
@@ -92,51 +102,19 @@
       document.getElementById('minutes').textContent = minutes;
       document.getElementById('seconds').textContent = seconds;
 
-      // Calculate total times
+      // Totals
       const totalMs = now - startDate;
-      const totalSeconds = Math.floor(totalMs / msInSecond);
-      const totalMinutes = Math.floor(totalMs / msInMinute);
-      const totalHours = Math.floor(totalMs / msInHour);
-      const totalDays = Math.floor(totalMs / msInDay);
-      const totalWeeks = Math.floor(totalDays / 7);
-      const totalMonths = (years * 12) + months + (days / 30); // Approximate months including days fraction
-      const totalYears = years + (months / 12) + (days / 365);
-
-      // Update "totals" display
-      document.getElementById('totalYears').textContent = totalYears.toFixed(2);
-      document.getElementById('totalMonths').textContent = totalMonths.toFixed(1);
-      document.getElementById('totalWeeks').textContent = totalWeeks;
-      document.getElementById('totalDays').textContent = totalDays;
-      document.getElementById('totalHours').textContent = totalHours;
-      document.getElementById('totalMinutes').textContent = totalMinutes;
-      document.getElementById('totalSeconds').textContent = totalSeconds;
+      document.getElementById('totalSeconds').textContent = Math.floor(totalMs / msInSecond);
+      document.getElementById('totalMinutes').textContent = Math.floor(totalMs / msInMinute);
+      document.getElementById('totalHours').textContent = Math.floor(totalMs / msInHour);
+      document.getElementById('totalDays').textContent = Math.floor(totalMs / msInDay);
+      document.getElementById('totalWeeks').textContent = Math.floor(totalMs / msInDay / 7);
+      document.getElementById('totalMonths').textContent = ((years * 12) + months + (days / 30)).toFixed(1);
+      document.getElementById('totalYears').textContent = (years + (months / 12) + (days / 365)).toFixed(2);
     }
 
     setInterval(updateClock, 1000);
-    updateClock(); // Initial call
-
-    // Load the sidebar
-    fetch("sidebar.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("sidebar-container").innerHTML = data;
-  
-        // Add toggle behavior after sidebar is loaded
-        window.toggleSidebar = function() {
-          document.getElementById("sidebar").classList.toggle("active");
-        };
-  
-        // Close sidebar on link click (mobile only)
-        document.querySelectorAll(".sidebar a").forEach(link => {
-          link.addEventListener("click", () => {
-            if (window.innerWidth <= 700) {
-              document.getElementById("sidebar").classList.remove("active");
-            }
-          });
-        });
-      });
-
+    updateClock();
   </script>
-
 </body>
 </html>
