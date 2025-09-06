@@ -91,6 +91,7 @@ a.back:hover {
 /* ==========================
    Sidebar Styles
    ========================== */
+/* Sidebar default: hidden offscreen */
 .sidebar {
   height: 100vh;
   width: 220px;
@@ -98,35 +99,34 @@ a.back:hover {
   padding-top: 30px;
   position: fixed;
   top: 0;
-  left: 0;
+  left: -220px; /* hidden by default */
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, left 0.3s ease;
   z-index: 1000;
 }
 
-.sidebar h2 {
-  font-family: 'Pacifico', cursive;
-  color: white;
-  margin-bottom: 30px;
+/* Sidebar active: slide in */
+.sidebar.active {
+  left: 0;
 }
 
-.sidebar a {
-  text-decoration: none;
-  color: white;
-  padding: 12px 0;
-  width: 100%;
-  text-align: center;
-  transition: background 0.3s;
+/* Content full width by default */
+.content {
+  margin-left: 0;
+  padding: 40px 20px;
+  transition: margin-left 0.3s ease;
 }
 
-.sidebar a:hover {
-  background-color: #1d0840;
+/* Push content over when sidebar is active */
+.sidebar.active ~ .content {
+  margin-left: 220px;
 }
 
+/* Hamburger button visible on all screens */
 .hamburger {
-  display: none;
+  display: block;
   position: fixed;
   top: 15px;
   left: 15px;
@@ -138,31 +138,29 @@ a.back:hover {
   cursor: pointer;
 }
 
-/* Page Content */
-.content {
-  margin-left: 220px;
-  padding: 40px 20px;
-  flex: 1;
-}
-
-/* Responsive Sidebar */
-@media (max-width: 700px) {
+/* Large screens: sidebar always visible */
+@media (min-width: 1200px) {
   .sidebar {
-    transform: translateX(-100%);
-    width: 200px;
-  }
-
-  .sidebar.active {
-    transform: translateX(0);
-  }
-
-  .hamburger {
-    display: block;
+    left: 0; /* always visible */
   }
 
   .content {
-    margin-left: 0;
-    padding: 20px;
+    margin-left: 220px; /* push content to make room for sidebar */
+  }
+
+  .hamburger {
+    display: none; /* hide hamburger on large screens */
+  }
+}
+
+/* Medium and small screens: collapsible sidebar */
+@media (max-width: 1199px) {
+  .sidebar {
+    left: -220px; /* hidden by default */
+  }
+
+  .sidebar.active {
+    left: 0;
   }
 }
 
