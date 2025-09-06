@@ -1,6 +1,6 @@
-/* ===========================
-   Global / All Pages
-=========================== */
+/* ==========================
+   General Styles for All Pages
+   ========================== */
 body {
   font-family: 'Pacifico', cursive;
   background-color: #4d179a;
@@ -9,7 +9,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
+  min-height: 100vh;
 }
 
 h1 {
@@ -24,7 +24,7 @@ p {
   color: #dcd5fe;
 }
 
-.button {
+a.button {
   display: inline-block;
   margin: 10px;
   padding: 15px 25px;
@@ -36,31 +36,25 @@ p {
   transition: background-color 0.3s ease;
 }
 
-.button:hover {
+a.button:hover {
   background-color: #4d179a;
 }
 
 a.back {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 25px;
-  background-color: #2f0d68;
   color: #dcd5fe;
   text-decoration: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  transition: background 0.3s ease;
+  font-size: 20px;
+  margin-top: 30px;
+  display: inline-block;
 }
 
 a.back:hover {
-  background-color: #4d179a;
+  text-decoration: underline;
 }
 
-/* =====================
-   Sidebar & Hamburger
-===================== */
-
-/* Sidebar default styles */
+/* ==========================
+   Sidebar Styles
+   ========================== */
 .sidebar {
   height: 100vh;
   width: 220px;
@@ -74,7 +68,6 @@ a.back:hover {
   align-items: center;
   transition: transform 0.3s ease;
   z-index: 1000;
-  transform: translateX(0); /* visible by default on desktop */
 }
 
 .sidebar h2 {
@@ -96,62 +89,50 @@ a.back:hover {
   background-color: #1d0840;
 }
 
-/* Hamburger button (desktop hidden by default) */
 .hamburger {
   display: none;
   position: fixed;
   top: 15px;
   left: 15px;
   font-size: 26px;
-  color: #2f0d68;
+  color: #d6336c;
   background: none;
   border: none;
   z-index: 1100;
   cursor: pointer;
 }
 
-/* =====================
-   Mobile Sidebar
-===================== */
-@media (max-width: 700px) {
+/* Page Content */
+.content {
+  margin-left: 220px;
+  padding: 40px 20px;
+  flex: 1;
+}
 
-  /* Sidebar hidden by default */
+/* Responsive Sidebar */
+@media (max-width: 700px) {
   .sidebar {
     transform: translateX(-100%);
     width: 200px;
   }
 
-  /* Sidebar slides in when active */
   .sidebar.active {
     transform: translateX(0);
   }
 
-  /* Hamburger button visible on mobile */
   .hamburger {
     display: block;
   }
 
-  /* Page content pushes down to avoid overlapping */
   .content {
     margin-left: 0;
-    padding: 40px 20px;
+    padding: 20px;
   }
 }
 
-/* =====================
-   Desktop Page Content
-===================== */
-@media (min-width: 701px) {
-  .content {
-    margin-left: 220px; /* leave space for visible sidebar */
-    padding: 40px 20px;
-  }
-}
-
-/* ===========================
-   Pictures / Carousel
-=========================== */
-/* Carousel Container */
+/* ==========================
+   Carousel Styles (Pictures)
+   ========================== */
 #carousel-container {
   width: 100%;
   max-width: 900px;
@@ -159,26 +140,22 @@ a.back:hover {
   overflow: hidden;
   border-radius: 12px;
   background-color: #2f0d68;
-  position: relative; /* makes buttons position absolutely */
+  position: relative;
   margin: 20px auto;
 }
 
-/* Carousel Image */
 #carousel-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
-  transition: opacity 0.5s ease; /* fade effect */
-  opacity: 1;
 }
 
-/* Carousel Buttons (Prev/Next) */
 .carousel-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.4);
   color: #fff;
   border: none;
   padding: 12px 18px;
@@ -186,21 +163,18 @@ a.back:hover {
   cursor: pointer;
   border-radius: 50%;
   z-index: 10;
-  opacity: 0; /* hidden by default */
+  opacity: 0;
   transition: opacity 0.3s ease, background 0.3s ease;
 }
 
-/* Fade in buttons when hovering over carousel */
 #carousel-container:hover .carousel-button {
   opacity: 1;
 }
 
-/* Darker background on button hover */
 .carousel-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Position buttons on left & right */
 #prev-button {
   left: 20px;
 }
@@ -209,7 +183,6 @@ a.back:hover {
   right: 20px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
   #carousel-container {
     aspect-ratio: auto;
@@ -218,9 +191,38 @@ a.back:hover {
   }
 }
 
-/* ===========================
-   Date / Details Section
-=========================== */
+/* ==========================
+   Clock Styles
+   ========================== */
+.section {
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background-color: #2f0d68;
+}
+
+#clock, #totals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.time-segment {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.label {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* ==========================
+   Date Page Styles
+   ========================== */
 details {
   background: #2f0d68;
   border-radius: 12px;
@@ -249,40 +251,9 @@ li {
   font-size: 1.1rem;
 }
 
-/* ===========================
-   Clock Sections
-=========================== */
-.section {
-  background-color: #2f0d68;
-  border-radius: 12px;
-  padding: 25px 30px;
-  max-width: 600px;
-  width: 90%;
-  margin: 40px auto;
-  text-align: center;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-#clock, #totals {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.time-segment {
-  margin: 12px 0;
-  font-size: 1.3rem;
-  color: #dcd5fe;
-}
-
-.label {
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-/* ===========================
-   About / Love Letter
-=========================== */
+/* ==========================
+   About Page Styles
+   ========================== */
 #love-letter {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 700px;
@@ -294,18 +265,4 @@ li {
   line-height: 1.8;
   color: #dcd5fe;
   margin: 20px auto;
-}
-
-/* ===========================
-   Responsive Headings & Text
-=========================== */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-    margin-top: 30px;
-  }
-
-  .time-segment {
-    font-size: 1.1rem;
-  }
 }
