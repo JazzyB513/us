@@ -225,3 +225,17 @@ p {
       margin-left: 6px;
     }
 
+    #love-letter {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 700px;
+      padding: 30px;
+      background-color: #2f0d68;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px #1d0840;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #dcd5fe;
+      margin: 20px;
+    }
+
+
