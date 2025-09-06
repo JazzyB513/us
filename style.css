@@ -142,6 +142,7 @@ a.back:hover {
 /* ===========================
    Pictures / Carousel
 =========================== */
+/* Carousel Container */
 #carousel-container {
   width: 100%;
   max-width: 900px;
@@ -149,22 +150,26 @@ a.back:hover {
   overflow: hidden;
   border-radius: 12px;
   background-color: #2f0d68;
-  position: relative;
+  position: relative; /* makes buttons position absolutely */
   margin: 20px auto;
 }
 
+/* Carousel Image */
 #carousel-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
+  transition: opacity 0.5s ease; /* fade effect */
+  opacity: 1;
 }
 
+/* Carousel Buttons (Prev/Next) */
 .carousel-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent background */
   color: #fff;
   border: none;
   padding: 12px 18px;
@@ -172,18 +177,21 @@ a.back:hover {
   cursor: pointer;
   border-radius: 50%;
   z-index: 10;
-  opacity: 0;
+  opacity: 0; /* hidden by default */
   transition: opacity 0.3s ease, background 0.3s ease;
 }
 
+/* Fade in buttons when hovering over carousel */
 #carousel-container:hover .carousel-button {
   opacity: 1;
 }
 
+/* Darker background on button hover */
 .carousel-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* Position buttons on left & right */
 #prev-button {
   left: 20px;
 }
@@ -192,6 +200,7 @@ a.back:hover {
   right: 20px;
 }
 
+/* Responsive adjustments */
 @media (max-width: 600px) {
   #carousel-container {
     aspect-ratio: auto;
