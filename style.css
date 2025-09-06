@@ -212,14 +212,7 @@
       max-width: 600px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .box1 {
-      background-color: #fce4ec;
-    }
-
-    .box2 {
-      background-color: #e3f2fd;
+      background-color: #2f0d68
     }
 
     .time-segment {
