@@ -1,22 +1,29 @@
+// sidebar.js
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("sidebar-container");
-  if (!container) return; // skip if page has no sidebar
+  if (!container) return; // Skip if no sidebar container
 
+  // Load the sidebar HTML
   fetch("sidebar.html")
     .then(response => response.text())
     .then(data => {
       container.innerHTML = data;
 
-      // Add toggle behavior after sidebar is loaded
-      window.toggleSidebar = function() {
-        document.getElementById("sidebar").classList.toggle("active");
-      };
+      const sidebar = document.getElementById("sidebar");
+      const hamburger = container.querySelector(".hamburger");
 
-      // Close sidebar on link click (mobile only)
-      document.querySelectorAll(".sidebar a").forEach(link => {
+      // Toggle sidebar on mobile
+      if (hamburger) {
+        hamburger.addEventListener("click", () => {
+          sidebar.classList.toggle("active");
+        });
+      }
+
+      // Close sidebar when a link is clicked on mobile
+      container.querySelectorAll(".sidebar a").forEach(link => {
         link.addEventListener("click", () => {
           if (window.innerWidth <= 700) {
-            document.getElementById("sidebar").classList.remove("active");
+            sidebar.classList.remove("active");
           }
         });
       });
