@@ -38,27 +38,6 @@
 
   <p><a href="index.html">← Back to Home</a></p>
 
-  <script> 
-    // Load the sidebar
-    fetch("sidebar.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("sidebar-container").innerHTML = data;
-  
-        // Add toggle behavior after sidebar is loaded
-        window.toggleSidebar = function() {
-          document.getElementById("sidebar").classList.toggle("active");
-        };
-  
-        // Close sidebar on link click (mobile only)
-        document.querySelectorAll(".sidebar a").forEach(link => {
-          link.addEventListener("click", () => {
-            if (window.innerWidth <= 700) {
-              document.getElementById("sidebar").classList.remove("active");
-            }
-          });
-        });
-      });
-</script>
+ <script src="sidebar.js"></script>
 </body>
 </html>
