@@ -7,8 +7,9 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
-  display: flex;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   /* Gradient background cycling through multiple pinks/purples/violets */
   background: linear-gradient(135deg, #ff99cc, #ff66b3, #a64dff, #4d179a, #9933ff, #ff99cc);
@@ -18,46 +19,28 @@ body {
 
 /* Smooth multicolor movement */
 @keyframes dreamyAurora {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 100%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Gentle brightness pulse */
 @keyframes pulseBrightness {
-  0% {
-    filter: brightness(0.95);
-  }
-  50% {
-    filter: brightness(1.05);
-  }
-  100% {
-    filter: brightness(0.95);
-  }
+  0% { filter: brightness(0.95); }
+  50% { filter: brightness(1.05); }
+  100% { filter: brightness(0.95); }
 }
 
 h1 {
   font-size: 75px;
   margin-bottom: 20px;
-  color: #dcd5fe;
 }
 
 p {
   font-size: 35px;
   margin-bottom: 20px;
-  color: #dcd5fe;
 }
 
 a.button {
@@ -91,7 +74,6 @@ a.back:hover {
 /* ==========================
    Sidebar Styles
    ========================== */
-/* Sidebar default: hidden offscreen */
 .sidebar {
   height: 100vh;
   width: 220px;
@@ -103,28 +85,33 @@ a.back:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease, left 0.3s ease;
+  transition: left 0.3s ease;
   z-index: 1000;
 }
 
-/* Sidebar active: slide in */
 .sidebar.active {
   left: 0;
 }
 
-/* Content full width by default */
-.content {
-  margin-left: 0;
-  padding: 40px 20px;
-  transition: margin-left 0.3s ease;
+.sidebar h2 {
+  font-family: 'Pacifico', cursive;
+  color: white;
+  margin-bottom: 30px;
 }
 
-/* Push content over when sidebar is active */
-.sidebar.active ~ .content {
-  margin-left: 220px;
+.sidebar a {
+  text-decoration: none;
+  color: white;
+  padding: 12px 0;
+  width: 100%;
+  text-align: center;
+  transition: background 0.3s;
 }
 
-/* Hamburger button visible on all screens */
+.sidebar a:hover {
+  background-color: #1d0840;
+}
+
 .hamburger {
   display: block;
   position: fixed;
@@ -138,30 +125,39 @@ a.back:hover {
   cursor: pointer;
 }
 
-/* Large screens: sidebar always visible */
-@media (min-width: 1200px) {
-  .sidebar {
-    left: 0; /* always visible */
-  }
-
-  .content {
-    margin-left: 220px; /* push content to make room for sidebar */
-  }
-
-  .hamburger {
-    display: none; /* hide hamburger on large screens */
-  }
+/* Content area */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  transition: margin-left 0.3s ease;
 }
 
-/* Medium and small screens: collapsible sidebar */
-@media (max-width: 1199px) {
-  .sidebar {
-    left: -220px; /* hidden by default */
-  }
+/* Push content over when sidebar is active on small screens */
+.sidebar.active ~ .content {
+  margin-left: 220px;
+}
 
-  .sidebar.active {
-    left: 0;
+/* Large screens: sidebar always visible */
+@media (min-width: 1200px) {
+  .sidebar { left: 0; }
+  .content {
+    margin-left: 220px;
+    align-items: flex-start;
+    text-align: left;
   }
+  .hamburger { display: none; }
+}
+
+/* Medium/small screens: sidebar collapsible */
+@media (max-width: 1199px) {
+  .sidebar { left: -220px; }
+  .sidebar.active { left: 0; }
 }
 
 /* ==========================
@@ -189,7 +185,7 @@ a.back:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0,0,0,0.4);
   color: #fff;
   border: none;
   padding: 12px 18px;
@@ -201,21 +197,12 @@ a.back:hover {
   transition: opacity 0.3s ease, background 0.3s ease;
 }
 
-#carousel-container:hover .carousel-button {
-  opacity: 1;
-}
+#carousel-container:hover .carousel-button { opacity: 1; }
 
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
+.carousel-button:hover { background-color: rgba(0,0,0,0.7); }
 
-#prev-button {
-  left: 20px;
-}
-
-#next-button {
-  right: 20px;
-}
+#prev-button { left: 20px; }
+#next-button { right: 20px; }
 
 @media (max-width: 600px) {
   #carousel-container {
@@ -264,7 +251,7 @@ details {
   margin: 20px auto;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 6px 12px rgba(214, 51, 108, 0.2);
+  box-shadow: 0 6px 12px rgba(214,51,108,0.2);
   text-align: left;
 }
 
