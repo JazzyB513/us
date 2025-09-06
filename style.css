@@ -216,22 +216,20 @@
     
 /*Clock*/
     .section {
-      margin: 20px auto;
+      margin: 40px auto;           /* more vertical space between sections */
       padding: 20px;
       border-radius: 12px;
-      max-width: 600px;
+      max-width: 600px;            /* limits width of each box */
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      background-color: #2f0d68
+      background-color: #2f0d68;
     }
-
-    .time-segment {
-      margin: 10px 0;
-      font-size: 1.2rem;
-    }
-    .label {
-      font-weight: bold;
-      margin-left: 5px;
+    
+    /* Optional: give clock/totals some internal spacing */
+    #clock, #totals {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* spacing between each time segment */
     }
 
 /*About*/
