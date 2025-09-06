@@ -1,114 +1,127 @@
-body {
-  font-family: 'Pacifico', cursive;
-  background-color: #4d179a;
-  color: #dcd5fe;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-h1 {
-  font-size: 75px;
-  margin-bottom: 20px;
-  color: #dcd5fe;
-}
-
-p {
-  font-size: 35px;
-  margin-bottom: 20px;
-  color: #dcd5fe;
-}
-
-.button {
-  display: inline-block;
-  margin: 10px;
-  padding: 15px 25px;
-  background-color: #2f0d68;
-  color: #dcd5fe;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #4d179a;
-}
-
+/*All Pages*/
+  body {
+    font-family: 'Pacifico', cursive;
+    background-color: #4d179a;
+    color: #dcd5fe;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  h1 {
+    font-size: 75px;
+    margin-bottom: 20px;
+    color: #dcd5fe;
+  }
+  
+  p {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #dcd5fe;
+  }
+  
+  .button {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 25px;
+    background-color: #2f0d68;
+    color: #dcd5fe;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #4d179a;
+  }
+  
+  a.back {
+    color: #dcd5fe;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 30px;
+    display: inline-block;
+  }
+  
+  a.back:hover {
+    text-decoration: underline;
+  }
+  
 /* Sidebar styles */
-.sidebar {
-  height: 100vh;
-  width: 220px;
-  background-color: #2f0d68;
-  padding-top: 30px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease;
-  z-index: 1000;
-}
-
-.sidebar h2 {
-  font-family: 'Pacifico', cursive;
-  color: white;
-  margin-bottom: 30px;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: white;
-  padding: 12px 0;
-  width: 100%;
-  text-align: center;
-  transition: background 0.3s;
-}
-
-.sidebar a:hover {
-  background-color: #1d0840;
-}
-
-/* Hamburger button */
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  font-size: 26px;
-  color: #d6336c;
-  background: none;
-  border: none;
-  z-index: 1100;
-  cursor: pointer;
-}
-
-/* Page content */
-.content {
-  margin-left: 220px;
-  padding: 40px 20px;
-  flex: 1;
-}
-
-@media (max-width: 700px) {
   .sidebar {
-    transform: translateX(-100%);
-    width: 200px;
     height: 100vh;
-    flex-direction: column;
-    justify-content: flex-start;
+    width: 220px;
+    background-color: #2f0d68;
+    padding-top: 30px;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+    z-index: 1000;
   }
-
-  .sidebar.active {
-    transform: translateX(0);
+  
+  .sidebar h2 {
+    font-family: 'Pacifico', cursive;
+    color: white;
+    margin-bottom: 30px;
   }
-
-  #carousel-container {
+  
+  .sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  
+  .sidebar a:hover {
+    background-color: #1d0840;
+  }
+  
+  .hamburger {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 26px;
+    color: #d6336c;
+    background: none;
+    border: none;
+    z-index: 1100;
+    cursor: pointer;
+  }
+  
+/* Page content */
+  .content {
+    margin-left: 220px;
+    padding: 40px 20px;
+    flex: 1;
+  }
+  
+  @media (max-width: 700px) {
+    .sidebar {
+      transform: translateX(-100%);
+      width: 200px;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  
+/*Pictures*/
+    #carousel-container {
       width: 100%;
       max-width: 900px;
       aspect-ratio: 16 / 9;
@@ -119,23 +132,22 @@ p {
       position: relative;
       margin: 20px auto;
     }
-
-    /* Ensures the image fits entirely inside */
+  
     #carousel-image {
       width: 100%;
       height: 100%;
       object-fit: contain;
       transition: opacity 0.4s ease-in-out;
     }
-
+  
     @media (max-width: 600px) {
       #carousel-container {
         aspect-ratio: auto;
         height: 100vh;
         border-radius: 0;
-        }
       }
-
+    }
+  
     .carousel-button {
       position: absolute;
       top: 50%;
@@ -150,31 +162,20 @@ p {
       z-index: 10;
       transition: background 0.3s ease;
     }
-
+  
     .carousel-button:hover {
       background: #2f0d68;
     }
-
+  
     #prev-button {
       left: 25px;
     }
-
+  
     #next-button {
       right: 25px;
     }
-
-    a.back {
-      color: #dcd5fe;
-      text-decoration: none;
-      font-size: 20px;
-      margin-top: 30px;
-      display: inline-block;
-    }
-
-    a.back:hover {
-      text-decoration: underline;
-    }
-
+  
+/*Date*/
    details {
       background: #2f0d68;
       border-radius: 12px;
@@ -185,46 +186,52 @@ p {
       box-shadow: 0 6px 12px rgba(214, 51, 108, 0.2);
       text-align: left;
     }
-
+  
     summary {
       font-size: 1.4rem;
       font-weight: bold;
       cursor: pointer;
       color: #dcd5fe;
     }
-
+  
     ul {
       margin-top: 15px;
       padding-left: 20px;
     }
-
+  
     li {
       margin: 8px 0;
       font-size: 1.1rem;
     }
-  
-    #clock, #totals {
-      background: #2f0d68;
+    
+/*Clock*/
+    .section {
+      margin: 20px auto;
+      padding: 20px;
       border-radius: 12px;
-      padding: 25px 40px;
-      box-shadow: 0 6px 12px #1d0840;
-      font-size: 1.5rem;
-      max-width: 450px;
-      width: 100%;
-      margin-bottom: 30px;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .box1 {
+      background-color: #fce4ec;
+    }
+
+    .box2 {
+      background-color: #e3f2fd;
     }
 
     .time-segment {
-      margin: 12px 0;
-      font-weight: 600;
+      margin: 10px 0;
+      font-size: 1.2rem;
     }
-
     .label {
-      font-weight: 400;
-      color: #dcd5fe;
-      margin-left: 6px;
+      font-weight: bold;
+      margin-left: 5px;
     }
 
+/*About*/
     #love-letter {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       max-width: 700px;
@@ -237,5 +244,5 @@ p {
       color: #dcd5fe;
       margin: 20px;
     }
-
-
+  
+  
