@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>💙 Us 💙</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
@@ -10,7 +11,9 @@
       background-color: #4d179a;
       color: #dcd5fe;
       text-align: center;
-      padding: 50px;
+      margin: 0;
+      padding: 0;
+      display: flex;
     }
 
     h1 {
@@ -53,7 +56,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      z-index: 1000;
     }
 
     .sidebar h2 {
@@ -75,6 +79,20 @@
       background-color: #b82b5c;
     }
 
+    /* Hamburger button */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 26px;
+      color: #d6336c;
+      background: none;
+      border: none;
+      z-index: 1100;
+      cursor: pointer;
+    }
+
     /* Page content */
     .content {
       margin-left: 220px;
@@ -84,35 +102,38 @@
 
     @media (max-width: 700px) {
       .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 0;
+        transform: translateX(-100%);
+        width: 200px;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 1000;
       }
 
-      .sidebar h2 {
-        display: none;
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .hamburger {
+        display: block;
       }
 
       .content {
         margin-left: 0;
         padding-top: 80px;
       }
-
-      .sidebar a {
-        padding: 10px;
-        font-size: 14px;
-      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- 🍔 Hamburger Button -->
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
   <!-- 🌸 Sidebar Navigation -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <h2>💙 Us 💙</h2>
     <a href="index.html">Home</a>
     <a href="pictures.html">📸 Photos 📸</a>
@@ -123,14 +144,22 @@
 
   <!-- Main Content Area -->
   <div class="content">
-    <h1>W💙 Our Love Story 💙</h1>
+    <h1>💙 Our Love Story 💙</h1>
     <p>A Page All About Us!</p>
+
+    <!-- Buttons/Links to other pages -->
+    <a href="pictures.html" class="button">📸 Pictures Together 📸</a>
+    <a href="about.html" class="button">💌 A Love Letter 💌</a>
+    <a href="clock.html" class="button">🗓️ Together Since 🗓️</a>
+    <a href="date.html" class="button">😘 Date Ideas 😘</a>
   </div>
 
-  <!-- Buttons/Links to other pages -->
-  <a href="pictures.html" class="button">📸 Pictures Together 📸</a>
-  <a href="about.html" class="button">💌 A Love Letter 💌</a>
-  <a href="clock.html" class="button">🗓️ Together Since 🗓️</a>
-  <a href="date.html" class="button">😘 Date Ideas 😘</a>
+  <!-- JS to toggle sidebar -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("active");
+    }
+  </script>
 </body>
 </html>
