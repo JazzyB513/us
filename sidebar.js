@@ -1,5 +1,3 @@
-// sidebar.js
-// Load the sidebar into any page that has #sidebar-container
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("sidebar-container");
   if (!container) return; // skip if page has no sidebar
