@@ -56,9 +56,11 @@ a.back:hover {
   background-color: #4d179a;
 }
 
-/* ===========================
-   Sidebar
-=========================== */
+/* =====================
+   Sidebar & Hamburger
+===================== */
+
+/* Sidebar default styles */
 .sidebar {
   height: 100vh;
   width: 220px;
@@ -72,6 +74,7 @@ a.back:hover {
   align-items: center;
   transition: transform 0.3s ease;
   z-index: 1000;
+  transform: translateX(0); /* visible by default on desktop */
 }
 
 .sidebar h2 {
@@ -93,6 +96,7 @@ a.back:hover {
   background-color: #1d0840;
 }
 
+/* Hamburger button (desktop hidden by default) */
 .hamburger {
   display: none;
   position: fixed;
@@ -106,36 +110,41 @@ a.back:hover {
   cursor: pointer;
 }
 
-/* Page content area */
-.content {
-  margin-left: 220px;
-  padding: 40px 20px;
-  flex: 1;
-}
-
-/* Responsive sidebar */
+/* =====================
+   Mobile Sidebar
+===================== */
 @media (max-width: 700px) {
+
+  /* Sidebar hidden by default */
   .sidebar {
     transform: translateX(-100%);
     width: 200px;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: flex-start;
-    position: fixed;
-    top: 0;
-    left: 0;
   }
 
+  /* Sidebar slides in when active */
   .sidebar.active {
     transform: translateX(0);
   }
 
-  .content {
-    margin-left: 0;
-  }
-
+  /* Hamburger button visible on mobile */
   .hamburger {
     display: block;
+  }
+
+  /* Page content pushes down to avoid overlapping */
+  .content {
+    margin-left: 0;
+    padding: 40px 20px;
+  }
+}
+
+/* =====================
+   Desktop Page Content
+===================== */
+@media (min-width: 701px) {
+  .content {
+    margin-left: 220px; /* leave space for visible sidebar */
+    padding: 40px 20px;
   }
 }
 
