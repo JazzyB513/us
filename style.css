@@ -3,13 +3,49 @@
    ========================== */
 body {
   font-family: 'Pacifico', cursive;
-  background-color: #4d179a;
   color: #dcd5fe;
   text-align: center;
   margin: 0;
   padding: 0;
   display: flex;
   min-height: 100vh;
+
+  /* Gradient background cycling through multiple pinks/purples/violets */
+  background: linear-gradient(135deg, #ff99cc, #ff66b3, #a64dff, #4d179a, #9933ff, #ff99cc);
+  background-size: 1200% 1200%;
+  animation: dreamyAurora 40s ease infinite, pulseBrightness 8s ease-in-out infinite alternate;
+}
+
+/* Smooth multicolor movement */
+@keyframes dreamyAurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Gentle brightness pulse */
+@keyframes pulseBrightness {
+  0% {
+    filter: brightness(0.95);
+  }
+  50% {
+    filter: brightness(1.05);
+  }
+  100% {
+    filter: brightness(0.95);
+  }
 }
 
 h1 {
