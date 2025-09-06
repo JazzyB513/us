@@ -81,7 +81,7 @@ a.back:hover {
   padding-top: 30px;
   position: fixed;
   top: 0;
-  left: -220px; /* hidden by default */
+  left: -220px; /* hidden by default on small screens */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,7 +115,7 @@ a.back:hover {
 .hamburger {
   position: fixed;
   top: 15px;
-  right: 15px;   /* move to right side */
+  right: 15px;   /* top-right corner */
   font-size: 26px;
   color: #d6336c;
   background: none;
@@ -124,7 +124,9 @@ a.back:hover {
   cursor: pointer;
 }
 
-/* Content area */
+/* ==========================
+   Content Area
+   ========================== */
 .content {
   flex: 1;
   display: flex;
@@ -137,20 +139,21 @@ a.back:hover {
   transition: margin-left 0.3s ease;
 }
 
-/* Push content over when sidebar is active on small screens */
+/* Shift content when sidebar is active on small screens */
 .sidebar.active ~ .content {
   margin-left: 220px;
 }
 
-/* Large screens: sidebar always visible */
+/* Large screens: sidebar always visible, content centered */
 @media (min-width: 1200px) {
   .sidebar { left: 0; }
   .content {
-    margin-left: 220px;
-    align-items: flex-start;
-    text-align: left;
+    margin-left: 220px;             /* space for sidebar */
+    max-width: calc(100% - 220px);
+    align-items: center;            /* center content horizontally */
+    text-align: center;             /* center text */
   }
-  .hamburger { display: none; }
+  .hamburger { display: none; }     /* hide hamburger on desktop */
 }
 
 /* Medium/small screens: sidebar collapsible */
@@ -197,18 +200,12 @@ a.back:hover {
 }
 
 #carousel-container:hover .carousel-button { opacity: 1; }
-
 .carousel-button:hover { background-color: rgba(0,0,0,0.7); }
-
 #prev-button { left: 20px; }
 #next-button { right: 20px; }
 
 @media (max-width: 600px) {
-  #carousel-container {
-    aspect-ratio: auto;
-    height: 100vh;
-    border-radius: 0;
-  }
+  #carousel-container { aspect-ratio: auto; height: 100vh; border-radius: 0; }
 }
 
 /* ==========================
