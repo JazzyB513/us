@@ -7,19 +7,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- 🍔 Hamburger Button -->
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
 
+  <!-- Sidebar will be injected here -->
   <div id="sidebar-container"></div>
 
-  <h1>📸 Pictures Together 📸</h1>
-
-  <div id="carousel-container">
-    <img id="carousel-image" src="" alt="Carousel Image">
-    <button class="carousel-button" id="prev-button" onclick="prevImage()">&#8592;</button>
-    <button class="carousel-button" id="next-button" onclick="nextImage()">&#8594;</button>
+  <!-- Main Content -->
+  <div class="content">
+    <div id="carousel-container">
+      <img id="carousel-image" alt="Slideshow">
+      <button id="prev-button" class="carousel-button" onclick="prevImage()">❮</button>
+      <button id="next-button" class="carousel-button" onclick="nextImage()">❯</button>
+    </div>
   </div>
 
-  <a href="index.html" class="back">← Back to Home</a>
+  <!-- Shared sidebar logic -->
+  <script src="script.js"></script>
 
+  <!-- Page-specific carousel logic -->
   <script>
     const imageUrls = [
       "images/IMG_0802.JPG",
@@ -32,7 +38,7 @@
     ];
 
     let currentIndex = 0;
-    const imgElement = document.getElementById('carousel-image');
+    const imgElement = document.getElementById("carousel-image");
 
     function showImage(index) {
       imgElement.style.opacity = 0;
@@ -54,28 +60,8 @@
       showImage(currentIndex);
     }
 
+    // Kick things off
     showImage(currentIndex);
-
-       // Load the sidebar
-    fetch("sidebar.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("sidebar-container").innerHTML = data;
-  
-        // Add toggle behavior after sidebar is loaded
-        window.toggleSidebar = function() {
-          document.getElementById("sidebar").classList.toggle("active");
-        };
-  
-        // Close sidebar on link click (mobile only)
-        document.querySelectorAll(".sidebar a").forEach(link => {
-          link.addEventListener("click", () => {
-            if (window.innerWidth <= 700) {
-              document.getElementById("sidebar").classList.remove("active");
-            }
-          });
-        });
-      });
   </script>
 </body>
 </html>
