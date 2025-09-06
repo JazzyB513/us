@@ -1,4 +1,3 @@
-
 // clock.js
 document.addEventListener("DOMContentLoaded", () => {
   const startDate = new Date(2021, 8, 13, 15, 45, 0); // Sept 13, 2021, 3:45 PM
@@ -6,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateClock() {
     const now = new Date();
 
+    // Years and months calculation
     let years = now.getFullYear() - startDate.getFullYear();
     let months = now.getMonth() - startDate.getMonth();
     let days = now.getDate() - startDate.getDate();
@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
       days += prevMonth.getDate();
     }
-
     if (months < 0) {
       years--;
       months += 12;
     }
 
+    // Adjusted start for weeks/hours/minutes/seconds
     const adjustedStart = new Date(startDate);
     adjustedStart.setFullYear(adjustedStart.getFullYear() + years);
     adjustedStart.setMonth(adjustedStart.getMonth() + months);
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const seconds = Math.floor(diffMs / msInSecond);
 
-    // Update clock display
+    // Update individual clock segments
     document.getElementById("years").textContent = years;
     document.getElementById("months").textContent = months;
     document.getElementById("weeks").textContent = weeks;
@@ -56,25 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("minutes").textContent = minutes;
     document.getElementById("seconds").textContent = seconds;
 
-    // Totals
+    // Total times
     const totalMs = now - startDate;
-    const totalSeconds = Math.floor(totalMs / msInSecond);
-    const totalMinutes = Math.floor(totalMs / msInMinute);
-    const totalHours = Math.floor(totalMs / msInHour);
+    document.getElementById("totalSeconds").textContent = Math.floor(totalMs / msInSecond);
+    document.getElementById("totalMinutes").textContent = Math.floor(totalMs / msInMinute);
+    document.getElementById("totalHours").textContent = Math.floor(totalMs / msInHour);
     const totalDays = Math.floor(totalMs / msInDay);
-    const totalWeeks = Math.floor(totalDays / 7);
+    document.getElementById("totalDays").textContent = totalDays;
+    document.getElementById("totalWeeks").textContent = Math.floor(totalDays / 7);
     const totalMonths = years * 12 + months + days / 30;
     const totalYears = years + months / 12 + days / 365;
-
-    document.getElementById("totalYears").textContent = totalYears.toFixed(2);
     document.getElementById("totalMonths").textContent = totalMonths.toFixed(1);
-    document.getElementById("totalWeeks").textContent = totalWeeks;
-    document.getElementById("totalDays").textContent = totalDays;
-    document.getElementById("totalHours").textContent = totalHours;
-    document.getElementById("totalMinutes").textContent = totalMinutes;
-    document.getElementById("totalSeconds").textContent = totalSeconds;
+    document.getElementById("totalYears").textContent = totalYears.toFixed(2);
   }
 
-  setInterval(updateClock, 1000);
   updateClock();
+  setInterval(updateClock, 1000);
 });
