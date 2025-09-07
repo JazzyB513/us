@@ -156,11 +156,11 @@ a.back:hover {
 /* Large screens: sidebar always visible, content centered */
 @media (min-width: 1200px) {
   .sidebar { left: 0; }
-  .content {
-    margin-left: 220px;   /* make room for sidebar */
-    max-width: calc(100% - 220px);
-    align-items: center;  /* keep it centered */
-    text-align: center;   /* stays centered */
+ .content {
+    margin-left: 220px;                 /* room for the sidebar */
+    width: calc(100% - 220px);          /* use the remaining width */
+    align-items: center;                 /* center children horizontally */
+    text-align: center;                  /* keep headings centered */
   }
   .hamburger { display: none; }     /* hide hamburger on desktop */
 }
@@ -182,7 +182,8 @@ a.back:hover {
   border-radius: 12px;
   background-color: #2f0d68;
   position: relative;
-  margin: 20px auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #carousel-image {
