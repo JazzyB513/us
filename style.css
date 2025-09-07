@@ -62,7 +62,7 @@ a.button:hover {
 a.back {
   color: #dcd5fe;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 30px;
   margin-top: 30px;
   display: inline-block;
 }
@@ -237,7 +237,7 @@ a.back:hover {
 
 .time-segment {
   margin: 10px 0;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .label {
