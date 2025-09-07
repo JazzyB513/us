@@ -116,13 +116,19 @@ a.back:hover {
 .hamburger {
   position: fixed;
   top: 15px;
-  right: 15px;   /* top-right corner */
-  font-size: 26px;
-  color: #d6336c;
+  left: 15px;         /* move back to left side */
+  font-size: 34px;    /* make it larger */
+  color: #4d179a;     /* dark purple */
   background: none;
   border: none;
   z-index: 1100;
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.2);  /* little pop on hover */
+  color: #a64dff;         /* brighter purple on hover */
 }
 
 /* ==========================
