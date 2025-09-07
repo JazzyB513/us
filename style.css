@@ -141,7 +141,6 @@ a.back:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 800px;
   margin: 0 auto;        /* centers horizontally */
   padding: 40px 20px;
   transition: margin-left 0.3s ease;
