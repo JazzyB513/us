@@ -246,6 +246,10 @@ a.back:hover {
   margin-left: 5px;
 }
 
+@media (max-width: 600px) {
+  .section { aspect-ratio: auto; height: 100vh; border-radius: 0; }
+}
+
 /* ==========================
    Date Page Styles
    ========================== */
