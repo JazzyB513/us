@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function spawnHeart(parent) {
   const heart = document.createElement("span");
   heart.classList.add("heart");
-  heart.innerHTML = "💜"; // You could swap to 💕 or 💖 if you like
+  heart.innerHTML = "💙"; 
   parent.appendChild(heart);
 
   // Random horizontal offset
