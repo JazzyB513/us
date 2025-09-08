@@ -34,11 +34,13 @@ body {
 }
 
 h1 {
+  font-family: 'Pacifico';
   font-size: 70px;
   margin-bottom: 20px;
 }
 
 p {
+  font-family: 'Pacifico';
   font-size: 35px;
   margin-bottom: 20px;
 }
